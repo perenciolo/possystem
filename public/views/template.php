@@ -50,18 +50,21 @@
 
 </head>
 
-<body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
-    <!-- Site wrapper -->
-    <div class="wrapper">
+<body class="hold-transition skin-blue sidebar-collapse sidebar-mini login-page">
+    <?php
 
-        <!-- Header -->
-        <?php include 'modules/header.php'; ?>
-        <!-- Menu -->
-        <?php include 'modules/sidebar.php'; ?>
-        <!-- Content -->
-        <?php
+    if (!empty($_SESSION['posStartSes']) && $_SESSION['posStartSes'] === 'ok') {
+        // <!-- Site wrapper -->
+        echo '<div class="wrapper">';
+
+        // <!-- Header -->
+        include 'modules/header.php';
+        // <!-- Menu -->
+        include 'modules/sidebar.php';
+
+        // <!-- Content -->
         if (!empty($_GET['route']) && $route = $_GET['route']) {
-            if (file_exists(__DIR__ . "/modules/{$route}.php")) {
+            if (file_exists(__DIR__ . "/modules/{$route}.php") && $route !== 'login') {
                 include __DIR__ . "/modules/{$route}.php";
             } else {
                 include __DIR__ . "/modules/404.php";
@@ -69,11 +72,15 @@
         } else {
             include __DIR__ . "/modules/home.php";
         }
-        ?>
-        <!-- Footer -->
-        <?php include 'modules/footer.php'; ?>
-    </div>
-    <!-- ./wrapper -->
+
+        // <!-- Footer -->
+        include 'modules/footer.php';
+        echo '</div>'; // <!-- ./wrapper -->
+    } else {
+        // Login Page.
+        include __DIR__ . "/modules/login.php";
+    }
+    ?>
 
     <!-- AdminLTE for demo purposes -->
     <script src="views/js/template.js"></script>
