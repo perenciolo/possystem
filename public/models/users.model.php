@@ -1,17 +1,17 @@
 <?php
 
 require_once "connection.php";
-/**
- *
- */
-class UsersModel {
+
+class UsersModel
+{
 
   /**
-   * =============================================
-   * SHOW USER
-   * =============================================.
+   * ============
+   *  SHOW USERS
+   * ============
    */
-  public static function MdlShowUsers($table, $item, $value) {
+  public static function MdlShowUsers($table, $item, $value)
+  {
 
     $stmt = Connection::connect()->prepare("SELECT * FROM $table WHERE $item = :$item");
 
@@ -20,7 +20,5 @@ class UsersModel {
     $stmt->execute();
 
     return $stmt->fetch();
-
   }
-
 }
