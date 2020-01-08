@@ -46,11 +46,25 @@ class ControllerUsers
                     && $response['user'] === $value
                     && $response['password'] === $encrypt
                 ) {
-                    echo '<br/><div class="alert alert-success">Bem-vindo ao sistema.</div>';
+                    echo '<br/>
+                    <div class="alert alert-success">
+                        Bem-vindo ao sistema.
+                    </div>';
+
                     $_SESSION['posStartSes'] = 'ok';
+                    $_SESSION['id'] = $response['id'];
+                    $_SESSION['name'] = $response['name'];
+                    $_SESSION['user'] = $response['user'];
+                    $_SESSION['user'] = $response['user'];
+                    $_SESSION['photo'] = $response['photo'];
+                    $_SESSION['profile'] = $response['profile'];
+
                     echo '<script>window.location = "home";</script>';
                 } else {
-                    echo '<br/><div class="alert alert-danger">Não foi possível completar o login. Por favor verifique seus dados.</div>';
+                    echo '<br/>
+                    <div class="alert alert-danger">
+                    Não foi possível completar o login. Por favor verifique seus dados.
+                    </div>';
                 }
             }
         }
@@ -164,5 +178,12 @@ class ControllerUsers
                 </script>';
             }
         }
+    }
+
+    public static function ctrShowUsers(string $item = '', string $value = '')
+    {
+        $table = 'users';
+
+        return UsersModel::mdlShowUsers($table, $item, $value);
     }
 }

@@ -10,16 +10,27 @@ class UsersModel
      *  SHOW USERS
      * ============
      */
-    public static function mdlShowUsers($table, $item, $value)
+    public static function mdlShowUsers($table, string $item = '', string $value = '')
     {
+        $where = $item ?  "WHERE $item = :$item" : '';
 
-        $stmt = Connection::connect()->prepare("SELECT * FROM $table WHERE $item = :$item");
+        $stmt = Connection::connect()
+            ->prepare("SELECT * FROM {$table}" . $where);
 
-        $stmt->bindParam(":" . $item, $value, PDO::PARAM_STR);
+        if ($where) {
+            $stmt->bindParam(":" . $item, $value, PDO::PARAM_STR);
+            if (!$stmt->execute()) {
+                return null;
+            }
 
-        $stmt->execute();
+            return $stmt->fetch();
+        }
 
-        return $stmt->fetch();
+        if (!$stmt->execute()) {
+            return null;
+        }
+
+        return $stmt->fetchAll();
     }
 
     /**
