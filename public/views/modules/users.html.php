@@ -177,9 +177,9 @@
               <div class="panel">
                 Upload Picture
               </div>
-              <input class="form-control newPicture" type="file" name="newPicture">
+              <input class="form-control" type="file" id="newPicture" name="newPicture">
               <p class="help-block">Max size 2mb</p>
-              <img src="views/img/users/default/anonymous.png" class="img-thumbnail pic-preview" width="100px" alt="">
+              <img src="views/img/users/default/anonymous.png" class="img-thumbnail" width="100px" alt="">
             </div>
             <!-- / form-group -->
           </div>
@@ -192,10 +192,6 @@
             Save changes
           </button>
         </div><!-- / .modal-footer -->
-        <?php
-        $createUser = new ControllerUsers();
-        $createUser->ctrCreateUser();
-        ?>
       </form>
     </div><!-- / .modal-content -->
   </div>
